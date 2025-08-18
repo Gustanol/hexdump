@@ -1,0 +1,18 @@
+CompileFlags:
+  Add:
+    - "-std=c11"
+    - "-Wall"
+    - "-Wextra"
+    - "-Iinclude"
+  Remove:
+    - "-std=c++*"
+
+Index:
+  Background: Build
+
+Completion:
+  AllScopes: No
+
+Diagnostics:
+  UnusedIncludes: Strict
+  MissingIncludes: Strict
