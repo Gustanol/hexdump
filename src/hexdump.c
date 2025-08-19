@@ -43,7 +43,7 @@ int read_file(const char *path, const char *mode) {
         printf("%.8x: ", offset);
 
         /*
-         * loop to print each hexadecimal values stored in buffer array
+         * loop to print each hexadecimal value stored in buffer array
          */
         for (int i = 0; i < read; i++) {
             printf("%.2x ", buffer[i]);
