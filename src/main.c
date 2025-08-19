@@ -1,8 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>  /* Para uint32_t, etc. */
+#include "hexdump.h"
 
 int main(int argc, char *argv[]) {
-    printf("Hello, World!\n");
+    /*
+     * call the function and store its return in the variable
+     */
+    read_file("/home/gustanol/projects/hexdump/tests/file.bin", "rb");
     return 0;
 }

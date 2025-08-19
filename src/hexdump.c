@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-void read_file(const char *path, const char *mode) {
+int read_file(const char *path, const char *mode) {
     /*
      * pointer that will represent file will be open
      *
@@ -16,12 +16,18 @@ void read_file(const char *path, const char *mode) {
      *
      * note that it just have 16 spaces because each line of a binary file has
      * 16 bytes (at last)
+     *
+     * the array is declared as a char type because 1 char = 1 byte and, in some cases, unsigned for
+     * default
+     *
+     * int8_t defines a byte as well but in a range of -127 and 127
      */
-    int16_t buffer[16];
+    unsigned char buffer[16];
 
     file = fopen(path, mode);
     if (file == NULL) {
         perror("Error opening file");
+        return -1;
     }
 
     /*
@@ -29,18 +35,24 @@ void read_file(const char *path, const char *mode) {
      *
      * `read` varible represents the amount of bytes read succesfully
      *
-     * `offset` represents the current index of bytes
-     * note that its icrease value it's 16
+     * `offset` represents the current index of bytes (in hexadecimal)
      */
+    unsigned int offset = 0x0;
     int read = fread(buffer, 1, 16, file);
-    unsigned int offset = 0x00000000;
     while (read > 0) {
-        read = fread(buffer, 1, 16, file);
-        printf("%x  ", offset);
+        printf("%.8x: ", offset);
+
+        /*
+         * loop to print each hexadecimal values stored in buffer array
+         */
         for (int i = 0; i < read; i++) {
-            printf("%x ", buffer[i]);
+            printf("%.2x ", buffer[i]);
         }
 
+        /*
+         * loop to convert each hexadecimal value in an ASCII character, if available
+         */
+        printf(" ");
         for (int i = 0; i < read; i++) {
             if (isprint(buffer[i])) {
                 printf("%c", buffer[i]);
@@ -48,5 +60,10 @@ void read_file(const char *path, const char *mode) {
                 printf(".");
             }
         }
+        printf("\n");
+        offset += read;
+        read = fread(buffer, 1, 16, file);
     }
+    fclose(file);
+    return 0;
 }
