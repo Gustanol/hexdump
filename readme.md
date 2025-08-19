@@ -68,6 +68,12 @@ the core logic:
 
 ---
 
+### Screenshot
+
+![1](./img/1.png)
+
+---
+
 ### How to run it?
 
 Use the [`Makefile`](./Makefile):
