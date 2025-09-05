@@ -6,7 +6,7 @@ This is a implementation of Hexdump Linux command written in C.
 
 ---
 
-### Here is explanation of the project:
+### Here is an explanation of the project:
 
 - [`hexdump.h`](./include/hexdump.h): main header file used to define the only function
 and use it in [`main.c`](./src/main.c) file.
